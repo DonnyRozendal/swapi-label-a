@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Star Wars Character List</string>
+    <string name="test">Yo waddup</string>
+    <string name="character_name">character_placeholder</string>
+</resources>
