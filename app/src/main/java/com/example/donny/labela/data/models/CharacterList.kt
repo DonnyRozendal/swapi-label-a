@@ -1,4 +1,3 @@
 package com.example.donny.labela.data.models
 
-class CharacterList {
-}
+class CharacterList(val results: List<Character>, val count: Int, val next: String)
