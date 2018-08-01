@@ -1,13 +1,25 @@
-package com.example.donny.labela
+package com.example.donny.labela.ui.list
 
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.donny.labela.R
+import com.example.donny.labela.ui.characterDetail.CharacterDetailActivity
 import kotlinx.android.synthetic.main.character_row.view.*
+import com.example.donny.labela.data.models.Character
 
-class MainAdapter(val characters: List<Character>): RecyclerView.Adapter<CustomViewHolder>() {
+class ListAdapter : RecyclerView.Adapter<CustomViewHolder>() {
+
+    val itemList = mutableListOf<Character>()
+
+    fun setList(newList: List<Character>) {
+        itemList.clear()
+        println("Size of item list is ${itemList.size}")
+        itemList.addAll(newList)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -16,11 +28,11 @@ class MainAdapter(val characters: List<Character>): RecyclerView.Adapter<CustomV
     }
 
     override fun getItemCount(): Int {
-        return characters.size
+        return itemList.size
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val character = characters.get(position)
+        val character = itemList.get(position)
         holder.view.textView_character_name.text = character.name
     }
 

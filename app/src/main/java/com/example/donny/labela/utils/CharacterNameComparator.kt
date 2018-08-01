@@ -1,4 +1,6 @@
-package com.example.donny.labela
+package com.example.donny.labela.utils
+
+import com.example.donny.labela.data.models.Character
 
 class CharacterNameComparator {
 
