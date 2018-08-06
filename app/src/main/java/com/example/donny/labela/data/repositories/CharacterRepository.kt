@@ -1,20 +1,24 @@
-package com.example.donny.labela.ui.list
+package com.example.donny.labela.data.repositories
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import com.example.donny.labela.data.models.Character
 import com.example.donny.labela.data.models.CharacterList
-import com.example.donny.labela.ui.base.BasePresenter
 import com.example.donny.labela.utils.CharacterNameComparator
 import com.google.gson.GsonBuilder
-import okhttp3.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
-class ListPresenter : BasePresenter<ListView>() {
-
+class CharacterRepository {
+    val sortedCharacters = MutableLiveData<List<Character>>()
+    var fetched = false
     private var characterPages = mutableListOf<CharacterList>()
     private var jsonStartPage: Int = 1
-    private var sortedCharacters = listOf<Character>()
 
-    fun initFetch(): List<Character> {
-        fetchCharacters(jsonStartPage)
+    fun initFetch(): LiveData<List<Character>> {
+        if (!fetched) {
+            fetchCharacters(jsonStartPage)
+        }
         return sortedCharacters
     }
 
@@ -25,22 +29,23 @@ class ListPresenter : BasePresenter<ListView>() {
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()
 
-        // Synchronous call
+        // Synchronous call with coroutine
         val response = client.newCall(request).execute()
         val body = response.body()?.string()
         val gson = GsonBuilder().create()
         val list = gson.fromJson(body, CharacterList::class.java)
         characterPages.add(list)
-        println(characterPages.size)
 
         // Recursive statement that keeps fetching a json, until there is no next page
-        if (list.next != null) {
+        if (!list.next.isNullOrEmpty()) {
             fetchCharacters(++jsonStartPage)
         } else {
+            fetched = true
             val characters = convertPages(characterPages)
             val sortedCharacters = characters.sortedWith(CharacterNameComparator)
-            this.sortedCharacters = sortedCharacters
+            this.sortedCharacters.postValue(sortedCharacters)
         }
+
     }
 
     private fun convertPages(characterPages: MutableList<CharacterList>): MutableList<Character> {

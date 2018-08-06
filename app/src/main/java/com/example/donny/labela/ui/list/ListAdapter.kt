@@ -12,11 +12,10 @@ import com.example.donny.labela.data.models.Character
 
 class ListAdapter : RecyclerView.Adapter<CustomViewHolder>() {
 
-    val itemList = mutableListOf<Character>()
+    private val itemList = mutableListOf<Character>()
 
     fun setList(newList: List<Character>) {
         itemList.clear()
-        println("Size of item list is ${itemList.size}")
         itemList.addAll(newList)
         notifyDataSetChanged()
     }

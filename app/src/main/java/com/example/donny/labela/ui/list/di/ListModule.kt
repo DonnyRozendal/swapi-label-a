@@ -1,6 +1,6 @@
 package com.example.donny.labela.ui.list.di
 
-import com.example.donny.labela.ui.list.ListPresenter
+import com.example.donny.labela.data.repositories.CharacterRepository
 import dagger.Module
 import dagger.Provides
 
@@ -8,8 +8,13 @@ import dagger.Provides
 class ListModule {
 
     @Provides
-    fun providesListPresenter(): ListPresenter {
-        return ListPresenter()
+    fun providesCharacterRepository(): CharacterRepository {
+        return CharacterRepository()
+    }
+
+    @Provides
+    fun providesViewModelFactory(repository: CharacterRepository): ListViewModelFactory {
+        return ListViewModelFactory(repository)
     }
 
 }
