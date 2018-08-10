@@ -9,7 +9,7 @@ import kotlinx.coroutines.experimental.launch
 class ListViewModel(private val repository: CharacterRepository) : ViewModel() {
     var observable = MediatorLiveData<List<Character>>()
 
-    init {
+    fun fetchData() {
         launch {
             observable.addSource(repository.initFetch()) {
                 observable.postValue(it)

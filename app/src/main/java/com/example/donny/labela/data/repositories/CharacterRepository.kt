@@ -6,6 +6,7 @@ import com.example.donny.labela.data.models.Character
 import com.example.donny.labela.data.models.CharacterList
 import com.example.donny.labela.utils.CharacterNameComparator
 import com.google.gson.GsonBuilder
+import kotlinx.coroutines.experimental.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -56,6 +57,22 @@ class CharacterRepository {
             }
         }
         return characters
+//        return characterPages.map { it.results.map { it } }.flatten()
+
     }
+
+    fun getChars(): MutableLiveData<List<Character>> {
+        val liveData = MutableLiveData<List<Character>>()
+
+
+        launch {
+            fetchCharacters(1)
+
+        }
+
+        return liveData
+    }
+
+
 
 }

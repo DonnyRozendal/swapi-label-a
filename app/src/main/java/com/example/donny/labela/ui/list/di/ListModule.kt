@@ -8,11 +8,6 @@ import dagger.Provides
 class ListModule {
 
     @Provides
-    fun providesCharacterRepository(): CharacterRepository {
-        return CharacterRepository()
-    }
-
-    @Provides
     fun providesViewModelFactory(repository: CharacterRepository): ListViewModelFactory {
         return ListViewModelFactory(repository)
     }
