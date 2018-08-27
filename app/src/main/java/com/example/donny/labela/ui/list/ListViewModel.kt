@@ -4,17 +4,24 @@ import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
 import com.example.donny.labela.data.models.Character
 import com.example.donny.labela.data.repositories.CharacterRepository
-import kotlinx.coroutines.experimental.launch
+import com.example.donny.labela.data.repositories.Result
+
 
 class ListViewModel(private val repository: CharacterRepository) : ViewModel() {
-    var observable = MediatorLiveData<List<Character>>()
+    val charObservable = MediatorLiveData<Result<List<Character>>>()
 
-    fun fetchData() {
-        launch {
-            observable.addSource(repository.initFetch()) {
-                observable.postValue(it)
+    fun getAllCharacters() {
+        charObservable.removeSource(repository.sortedCharacters)
+        charObservable.addSource(repository.sortedCharacters) {
+            if (it?.error != null) {
+                charObservable.postValue(Result(it.data, it.error))
+            } else {
+                it?.data?.let { list ->
+                    charObservable.postValue(Result(list, it.error))
+                }
             }
         }
+        if (!repository.fetched) repository.initGetCharacters()
     }
 
 }

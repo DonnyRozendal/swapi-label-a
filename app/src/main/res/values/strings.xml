@@ -3,4 +3,15 @@
     <string name="test">Yo waddup</string>
     <string name="character_name">character_placeholder</string>
     <string name="placeholder">placeholder</string>
+    
+    <string name="details_name">Name</string>
+    <string name="details_height">Height</string>
+    <string name="details_mass">Mass</string>
+    <string name="details_hair_color">Hair Color</string>
+    <string name="details_skin_color">Skin Color</string>
+    <string name="details_eye_color">Eye Color</string>
+    <string name="details_birth_year">Birth Year</string>
+    <string name="details_gender">Gender</string>
+    <string name="details_homeworld">Homeworld</string>
+
 </resources>

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.donny.labela.R
 import com.example.donny.labela.data.models.Character
-import kotlinx.android.synthetic.main.character_row.view.*
+import kotlinx.android.synthetic.main.character_list_row.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.CustomViewHolder>() {
 
@@ -26,7 +26,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cellForRow = layoutInflater.inflate(R.layout.character_row, parent, false)
+        val cellForRow = layoutInflater.inflate(R.layout.character_list_row, parent, false)
         return CustomViewHolder(cellForRow, listener)
     }
 

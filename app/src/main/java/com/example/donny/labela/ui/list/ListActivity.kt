@@ -1,67 +1,64 @@
 package com.example.donny.labela.ui.list
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.widget.Toast
 import com.example.donny.labela.R
-import com.example.donny.labela.app.App
 import com.example.donny.labela.data.models.Character
 import com.example.donny.labela.ui.characterDetail.CharacterDetailActivity
-import com.example.donny.labela.ui.list.di.DaggerListComponent
-import com.example.donny.labela.ui.list.di.ListModule
-import com.example.donny.labela.ui.list.di.ListViewModelFactory
-import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.character_list.*
+import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class ListActivity : AppCompatActivity(), ListAdapter.OnItemClickListener {
 
     private val adapter = ListAdapter()
 
-    @Inject
-    lateinit var viewModelFactory: ListViewModelFactory
+    private val viewModel by viewModel<ListViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        DaggerListComponent.builder()
-                .applicationComponent(App.get(this).applicationComponent)
-                .listModule(ListModule())
-                .build().inject(this)
-        val vm = ViewModelProviders.of(this, viewModelFactory)[ListViewModel::class.java]
+        setContentView(R.layout.character_list)
 
         initAdapter()
-        initFetch(vm)
-
-
+        initFetch(viewModel)
     }
 
     private fun initAdapter() {
-
         val dividerDecorator = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        recyclerView_main.layoutManager = LinearLayoutManager(this)
-        recyclerView_main.addItemDecoration(dividerDecorator)
-        recyclerView_main.adapter = adapter
+        recyclerView_character_list.layoutManager = LinearLayoutManager(this)
+        recyclerView_character_list.addItemDecoration(dividerDecorator)
+        recyclerView_character_list.adapter = adapter
         adapter.setListeners(this)
     }
 
-    private fun initFetch(vm: ListViewModel) {
-        vm.observable.observe(this, Observer {
-            if (it != null) {
-                adapter.setList(it)
+    private fun initFetch(viewModel: ListViewModel) {
+        viewModel.charObservable.observe(this, Observer {
+            if (it?.data != null) {
+                progressBar.visibility = View.GONE
+                adapter.setList(it.data)
+            } else {
+                Toast.makeText(this, it?.error, Toast.LENGTH_LONG).show()
+                progressBar.visibility = View.GONE
             }
         })
-
-        vm.fetchData()
+        viewModel.getAllCharacters()
+        progressBar.visibility = View.VISIBLE
     }
 
     override fun onItemClick(char: Character) {
         val intent = CharacterDetailActivity.getIntent(this)
-        intent.putExtra("char_id", char.name)
+        intent.putExtra("selectedCharacter", char)
         startActivity(intent)
-        overridePendingTransition(R.anim.slide_in_right, R.anim.list_slide_out_left)
+        if (char.name.equals("Luke Skywalker")) {
+            overridePendingTransition(R.anim.slide_in_right_mark, R.anim.list_slide_out_left_mark)
+        } else {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.list_slide_out_left)
+        }
     }
 
 }
