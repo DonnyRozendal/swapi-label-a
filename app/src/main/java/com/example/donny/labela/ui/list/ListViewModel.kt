@@ -8,6 +8,7 @@ import com.example.donny.labela.data.repositories.Result
 
 
 class ListViewModel(private val repository: CharacterRepository) : ViewModel() {
+
     val charObservable = MediatorLiveData<Result<List<Character>>>()
 
     fun getAllCharacters() {

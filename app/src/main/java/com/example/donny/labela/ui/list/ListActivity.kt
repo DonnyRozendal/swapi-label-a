@@ -1,6 +1,7 @@
 package com.example.donny.labela.ui.list
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -25,7 +26,7 @@ class ListActivity : AppCompatActivity(), ListAdapter.OnItemClickListener {
         setContentView(R.layout.character_list)
 
         initAdapter()
-        initFetch(viewModel)
+        initFetch()
     }
 
     private fun initAdapter() {
@@ -36,7 +37,7 @@ class ListActivity : AppCompatActivity(), ListAdapter.OnItemClickListener {
         adapter.setListeners(this)
     }
 
-    private fun initFetch(viewModel: ListViewModel) {
+    private fun initFetch() {
         viewModel.charObservable.observe(this, Observer {
             if (it?.data != null) {
                 progressBar.visibility = View.GONE
