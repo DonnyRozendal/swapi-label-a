@@ -2,7 +2,7 @@ package com.example.donny.labela.di.application
 
 import com.example.donny.labela.ui.characterDetail.CharacterDetailViewModel
 import com.example.donny.labela.ui.list.ListViewModel
-import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.androidx.viewmodel.experimental.builder.viewModel
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 

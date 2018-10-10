@@ -1,14 +1,14 @@
 package com.example.donny.labela.ui.characterDetail
 
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.donny.labela.R
 import com.example.donny.labela.data.models.Character
 import kotlinx.android.synthetic.main.character_details.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterDetailActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val character = intent.getParcelableExtra<Character>("selectedCharacter")
-        if (character.name.equals("Luke Skywalker")) {
+        if (character.name == "Luke Skywalker") {
             setContentView(R.layout.mark)
         } else {
             setContentView(R.layout.character_details)

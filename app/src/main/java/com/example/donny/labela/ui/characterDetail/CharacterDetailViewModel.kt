@@ -1,8 +1,8 @@
 package com.example.donny.labela.ui.characterDetail
 
-import android.arch.core.util.Function
-import android.arch.lifecycle.*
-import android.util.Log
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.donny.labela.data.models.Planet
 import com.example.donny.labela.data.repositories.CharacterDetailRepository
 

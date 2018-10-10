@@ -4,6 +4,7 @@ import com.example.donny.labela.data.repositories.CharacterDetailRepository
 import com.example.donny.labela.data.repositories.CharacterRepository
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
+import org.koin.experimental.builder.single
 
 /**
  * Created by donnyrozendal on 24-08-18.

@@ -1,7 +1,7 @@
 package com.example.donny.labela.utils
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.donny.labela.data.repositories.BaseRepository
 import com.example.donny.labela.data.repositories.CharacterDetailRepository
 import com.example.donny.labela.data.repositories.CharacterRepository

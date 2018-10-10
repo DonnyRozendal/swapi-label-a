@@ -1,7 +1,7 @@
 package com.example.donny.labela.ui.list
 
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import com.example.donny.labela.data.models.Character
 import com.example.donny.labela.data.repositories.CharacterRepository
 import com.example.donny.labela.data.repositories.Result

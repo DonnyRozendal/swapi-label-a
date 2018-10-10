@@ -1,13 +1,12 @@
 package com.example.donny.labela.data.repositories
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.donny.labela.data.api.Api
 import com.example.donny.labela.data.models.Character
 import com.example.donny.labela.data.models.CharacterList
 import com.example.donny.labela.utils.CharacterNameComparator
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.launch
-import org.json.JSONObject
 
 
 class CharacterRepository(private val api: Api) : BaseRepository {
@@ -68,7 +67,7 @@ class CharacterRepository(private val api: Api) : BaseRepository {
     }
 
     private fun getCharacters(pageNumber: Int) {
-        launch {
+        GlobalScope.launch {
             println("Attempting to fetch JSON page $pageNumber")
 
             val response = api.fetchCharacterPage(pageNumber.toString()).execute()

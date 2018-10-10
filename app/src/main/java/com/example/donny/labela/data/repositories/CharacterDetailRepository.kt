@@ -1,7 +1,7 @@
 package com.example.donny.labela.data.repositories
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.donny.labela.data.api.Api
 import com.example.donny.labela.data.models.Planet
 import kotlinx.coroutines.experimental.launch
