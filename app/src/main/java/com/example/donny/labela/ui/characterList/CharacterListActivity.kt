@@ -1,8 +1,7 @@
-package com.example.donny.labela.ui.list
+package com.example.donny.labela.ui.characterList
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.donny.labela.R
@@ -12,11 +11,11 @@ import kotlinx.android.synthetic.main.character_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class ListActivity : AppCompatActivity(), ListAdapter.OnItemClickListener {
+class CharacterListActivity : AppCompatActivity(), CharacterListAdapter.OnItemClickListener {
 
-    private val adapter = ListAdapter()
+    private val adapter = CharacterListAdapter()
 
-    private val viewModel by viewModel<ListViewModel>()
+    private val viewModel by viewModel<CharacterListViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +34,11 @@ class ListActivity : AppCompatActivity(), ListAdapter.OnItemClickListener {
     }
 
     private fun initFetch() {
-        viewModel.charObservable.observe(this, Observer {
-            if (it?.data != null) {
+        viewModel.characterList.observe(this, Observer {
+            if (it != null) {
                 progressBar.visibility = View.GONE
-                adapter.setList(it.data)
+                adapter.setList(it)
             } else {
-                Toast.makeText(this, it?.error, Toast.LENGTH_LONG).show()
                 progressBar.visibility = View.GONE
             }
         })

@@ -19,4 +19,25 @@ class Character(val name: String,
                 val starships: List<String>,
                 val created: String,
                 val edited: String,
-                val url: String) : Parcelable
+                val url: String) : Parcelable {
+
+    companion object {
+        fun empty() = Character("",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                emptyList(),
+                "",
+                "",
+                "")
+    }
+
+}

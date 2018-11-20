@@ -1,4 +1,4 @@
-package com.example.donny.labela.di.data
+package com.example.donny.labela.di.room
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -15,7 +15,7 @@ interface CharacterDao {
     fun getAll(): List<CharacterData>
 
     @Insert(onConflict = REPLACE)
-    fun isert(characterData: CharacterData)
+    fun insert(characterData: CharacterData)
 
     @Query("DELETE from characterData")
     fun deleteAll()

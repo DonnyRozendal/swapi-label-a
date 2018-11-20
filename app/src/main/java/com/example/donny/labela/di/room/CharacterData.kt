@@ -1,4 +1,4 @@
-package com.example.donny.labela.di.data
+package com.example.donny.labela.di.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

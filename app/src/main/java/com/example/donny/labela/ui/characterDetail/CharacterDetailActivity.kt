@@ -33,8 +33,6 @@ class CharacterDetailActivity : AppCompatActivity() {
         getHomeworld(character)
     }
 
-
-
     private fun fillAdapter(character: Character) {
         textView_name_right.text = character.name
         textView_height_right.text = character.height
@@ -47,7 +45,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun getHomeworld(character: Character) {
-        viewModel.planetObservable.observe(this, Observer {
+        viewModel.planet.observe(this, Observer {
             textView_homeworld_right.text = it?.name
         })
         Regex("""\d+""").find(character.homeworld)?.let {

@@ -1,4 +1,4 @@
-package com.example.donny.labela.data.api
+package com.example.donny.labela.data.network
 
 import com.example.donny.labela.data.models.CharacterList
 import com.example.donny.labela.data.models.Planet

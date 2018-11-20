@@ -1,4 +1,4 @@
-package com.example.donny.labela.ui.list
+package com.example.donny.labela.ui.characterList
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import com.example.donny.labela.R
 import com.example.donny.labela.data.models.Character
 import kotlinx.android.synthetic.main.character_list_row.view.*
 
-class ListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<ListAdapter.CustomViewHolder>() {
+class CharacterListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<CharacterListAdapter.CustomViewHolder>() {
 
     private val itemList = mutableListOf<Character>()
 
